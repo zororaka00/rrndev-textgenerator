@@ -23,6 +23,7 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
+      style="background-color: #eae4db;"
     >
       <q-list>
         <q-item-label
