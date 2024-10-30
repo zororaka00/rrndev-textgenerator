@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Text Generator",
   "productName": "Text Generator",
-  "author": "Zoro Raka <rakawidhiantoro@gmail.com>",
+  "author": "Raka <rakawidhiantoro@gmail.com>",
   "private": true,
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
