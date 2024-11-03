@@ -23,6 +23,11 @@ quasar build
 ### Customize the configuration
 See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
 
+
+### Play Store
+[Download Here](https://play.google.com/store/apps/details?id=xyz.rrndev.textgenerator.app).
+```
+
 ---
 
 ## Support Development
