@@ -6,7 +6,7 @@
       </q-card-section>
       <q-separator inset />
       <q-card-section class="q-gutter-md">
-        <q-input filled v-model="result" label="Result" readonly >
+        <q-input filled v-model="result" label="Result" type="textarea" readonly >
           <template v-slot:append>
             <q-icon name="mdi-clipboard-multiple-outline" @click="general.copyClipboard(result)" />
           </template>

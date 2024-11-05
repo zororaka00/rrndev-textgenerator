@@ -12,6 +12,11 @@ const routes: RouteRecordRaw[] = [
     children: [{ path: '', component: () => import('pages/NumberPage.vue') }],
   },
   {
+    path: '/hash',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [{ path: '', component: () => import('pages/HashPage.vue') }],
+  },
+  {
     path: '/wallet',
     component: () => import('layouts/MainLayout.vue'),
     children: [{ path: '', component: () => import('pages/WalletPage.vue') }],

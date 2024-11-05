@@ -2,7 +2,7 @@
     <q-page class="q-pa-md">
       <q-card flat bordered class="col b-card">
         <q-card-section class="q-gutter-md text-center">
-          <div class="text-h5 text-bold">Number Generator</div>
+          <div class="text-h5 text-bold">Hash Generator</div>
         </q-card-section>
         <q-separator inset />
         <q-card-section class="q-gutter-md">
@@ -12,9 +12,9 @@
             </template>
           </q-input>
 
-          <q-input filled v-model="minNum" type="number" label="Minimum" />
+          <q-select filled v-model="model" :options="options" label="Select Hash" />
 
-          <q-input filled v-model="maxNum" type="number" label="Maximum" />
+          <q-input filled v-model="dataText" label="Text" type="textarea" />
 
           <div class="text-center">
             <q-btn label="Generate" type="submit" color="primary" class="full-width" @click="generate()" />
@@ -31,14 +31,14 @@ import { useGeneralStore } from '../stores/general';
 
 const general = useGeneralStore();
 const result = ref('');
-const minNum = ref(1);
-const maxNum = ref(100);
+const dataText = ref('');
+const model = ref('MD5');
+const options = ref(['MD5', 'RIPEMD160', 'SHA1', 'SHA3', 'SHA224', 'SHA256', 'SHA384', 'SHA512']);
 
 const generate = async () => {
-    const newGen = await general.generateRandomNumber(minNum.value, maxNum.value);
-    result.value = newGen.toString();
+    result.value = await general.generateHash(model.value, dataText.value);
 };
 defineOptions({
-    name: 'NumberPage'
+    name: 'HashPage'
 });
 </script>

@@ -68,6 +68,12 @@ const linksList: EssentialLinkProps[] = [
     link: '/#/number'
   },
   {
+    title: 'Hash',
+    caption: 'Hash Generator',
+    icon: 'mdi-lock',
+    link: '/#/hash'
+  },
+  {
     title: 'Ethereum Wallet',
     caption: 'Ethereum Wallet Generator',
     icon: 'mdi-ethereum',

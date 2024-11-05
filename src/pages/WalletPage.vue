@@ -16,18 +16,18 @@
               <q-icon name="mdi-clipboard-multiple-outline" @click="general.copyClipboard(mnemonic)" />
             </template>
           </q-input>
-          <q-input filled v-model="privatekey" label="Private Key" readonly v-else>
+          <q-input filled v-model="privatekey" type="textarea" label="Private Key" readonly v-else>
             <template v-slot:append>
               <q-icon name="mdi-clipboard-multiple-outline" @click="general.copyClipboard(privatekey)" />
             </template>
           </q-input>
 
-          <q-input filled v-model="wallet_address" label="Wallet Address" readonly >
+          <q-input filled v-model="wallet_address" type="textarea" label="Wallet Address" readonly >
             <template v-slot:append>
               <q-icon name="mdi-clipboard-multiple-outline" @click="general.copyClipboard(wallet_address)" />
             </template>
           </q-input>
-  
+
           <div class="text-center">
             <q-btn label="Generate" type="submit" color="primary" class="full-width" @click="generate()" />
           </div>
@@ -68,4 +68,3 @@ defineOptions({
     name: 'NumberPage'
 });
 </script>
-  
