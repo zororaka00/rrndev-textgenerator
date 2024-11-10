@@ -74,6 +74,12 @@ const linksList: EssentialLinkProps[] = [
     link: '/#/hash'
   },
   {
+    title: 'Text Styler',
+    caption: 'Text Styler Generator',
+    icon: 'mdi-text-shadow',
+    link: '/#/styler'
+  },
+  {
     title: 'Ethereum Wallet',
     caption: 'Ethereum Wallet Generator',
     icon: 'mdi-ethereum',

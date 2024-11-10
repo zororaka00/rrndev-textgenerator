@@ -6,12 +6,6 @@
         </q-card-section>
         <q-separator inset />
         <q-card-section class="q-gutter-md">
-          <q-input filled v-model="result" label="Result" type="textarea" readonly >
-            <template v-slot:append>
-              <q-icon name="mdi-clipboard-multiple-outline" @click="general.copyClipboard(result)" />
-            </template>
-          </q-input>
-
           <q-input filled v-model="minNum" type="number" label="Minimum" />
 
           <q-input filled v-model="maxNum" type="number" label="Maximum" />
@@ -19,6 +13,12 @@
           <div class="text-center">
             <q-btn label="Generate" type="submit" color="primary" class="full-width" @click="generate()" />
           </div>
+
+          <q-input filled v-model="result" label="Result" type="textarea" readonly >
+            <template v-slot:append>
+              <q-icon name="mdi-clipboard-multiple-outline" @click="general.copyClipboard(result)" />
+            </template>
+          </q-input>
         </q-card-section>
       </q-card>
     </q-page>

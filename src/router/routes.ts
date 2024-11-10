@@ -17,6 +17,11 @@ const routes: RouteRecordRaw[] = [
     children: [{ path: '', component: () => import('pages/HashPage.vue') }],
   },
   {
+    path: '/styler',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [{ path: '', component: () => import('pages/StylerPage.vue') }],
+  },
+  {
     path: '/wallet',
     component: () => import('layouts/MainLayout.vue'),
     children: [{ path: '', component: () => import('pages/WalletPage.vue') }],
