@@ -26,9 +26,10 @@ See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-
 
 ### Play Store
 [Download Here](https://play.google.com/store/apps/details?id=xyz.rrndev.textgenerator.app).
-```
 
----
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
 
 ## Support Development
 If you find this project helpful and would like to support further development, consider making a donation:
