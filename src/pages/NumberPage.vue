@@ -1,33 +1,52 @@
 <template>
-    <q-page class="q-pa-md">
-      <q-card flat bordered class="col b-card">
-        <q-card-section class="q-gutter-md text-center">
-          <div class="text-h5 text-bold">Number Generator</div>
-        </q-card-section>
-        <q-separator inset />
-        <q-card-section class="q-gutter-md">
-          <q-input filled v-model="minNum" type="number" label="Minimum" />
+  <q-page class="q-pa-md page-container">
+    <AnimatedCard title="Number Generator" :delay="0">
+      <div class="form-content">
+        <AnimatedInput
+          v-model="minNum"
+          type="number"
+          label="Minimum Number"
+          icon="mdi-numeric-1-box"
+        />
 
-          <q-input filled v-model="maxNum" type="number" label="Maximum" />
+        <AnimatedInput
+          v-model="maxNum"
+          type="number"
+          label="Maximum Number"
+          icon="mdi-numeric-9-box"
+        />
 
-          <div class="text-center">
-            <q-btn label="Generate" type="submit" color="primary" class="full-width" @click="generate()" />
-          </div>
+        <AnimatedButton
+          label="Generate Number"
+          @click="generate"
+          variant="accent"
+        />
 
-          <q-input filled v-model="result" label="Result" type="textarea" readonly >
-            <template v-slot:append>
-              <q-icon name="mdi-clipboard-multiple-outline" @click="general.copyClipboard(result)" />
+        <div class="result-container">
+          <AnimatedInput
+            v-model="result"
+            label="Generated Number"
+            type="textarea"
+            readonly
+            icon="mdi-counter"
+          >
+            <template #append>
+              <CopyButton :text="result" />
             </template>
-          </q-input>
-        </q-card-section>
-      </q-card>
-    </q-page>
-  </template>
+          </AnimatedInput>
+        </div>
+      </div>
+    </AnimatedCard>
+  </q-page>
+</template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-
 import { useGeneralStore } from '../stores/general';
+import AnimatedCard from '../components/AnimatedCard.vue';
+import AnimatedInput from '../components/AnimatedInput.vue';
+import AnimatedButton from '../components/AnimatedButton.vue';
+import CopyButton from '../components/CopyButton.vue';
 
 const general = useGeneralStore();
 const result = ref('');
@@ -35,10 +54,28 @@ const minNum = ref(1);
 const maxNum = ref(100);
 
 const generate = async () => {
-    const newGen = await general.generateRandomNumber(minNum.value, maxNum.value);
-    result.value = newGen.toString();
+  const newGen = await general.generateRandomNumber(minNum.value, maxNum.value);
+  result.value = newGen.toString();
 };
+
 defineOptions({
-    name: 'NumberPage'
+  name: 'NumberPage'
 });
 </script>
+
+<style scoped>
+.page-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.result-container {
+  margin-top: var(--spacing-md);
+}
+</style>
