@@ -36,9 +36,6 @@
           class="drawer-item"
         />
       </q-list>
-      <div class="drawer-footer">
-        <div class="footer-text">v1.0.0</div>
-      </div>
     </q-drawer>
 
     <q-page-container>
@@ -73,12 +70,6 @@ const linksList: EssentialLinkProps[] = [
     link: '/#/number'
   },
   {
-    title: 'Hash',
-    caption: 'Hash Generator',
-    icon: 'mdi-lock',
-    link: '/#/hash'
-  },
-  {
     title: 'Text Styler',
     caption: 'Text Styler Generator',
     icon: 'mdi-text-shadow',
@@ -89,6 +80,24 @@ const linksList: EssentialLinkProps[] = [
     caption: 'Ethereum Wallet Generator',
     icon: 'mdi-ethereum',
     link: '/#/wallet'
+  },
+  {
+    title: 'Hash',
+    caption: 'Hash Generator',
+    icon: 'mdi-lock',
+    link: '/#/hash'
+  },
+  {
+    title: 'Encryption',
+    caption: 'Encryption Generator',
+    icon: 'mdi-lock-plus',
+    link: '/#/encryption'
+  },
+  {
+    title: 'Decryption',
+    caption: 'Decryption Generator',
+    icon: 'mdi-lock-open-outline',
+    link: '/#/decryption'
   }
 ];
 
@@ -191,22 +200,6 @@ function toggleLeftDrawer () {
     opacity: 1;
     transform: translateX(0);
   }
-}
-
-.drawer-footer {
-  position: absolute;
-  bottom: 20px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  padding: 16px;
-  border-top: 1px solid rgba(26, 35, 126, 0.1);
-}
-
-.footer-text {
-  color: #3949ab;
-  font-size: 0.85rem;
-  font-weight: 500;
 }
 
 .fade-slide-enter-active,

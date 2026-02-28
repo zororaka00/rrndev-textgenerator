@@ -8,10 +8,10 @@
         <q-separator inset class="custom-separator" />
         <q-card-section class="q-gutter-md form-section">
           <div class="input-wrapper min-input">
-            <q-input 
-              filled 
-              v-model="minNum" 
-              type="number" 
+            <q-input
+              filled
+              v-model="minNum"
+              type="number"
               label="Minimum"
               class="custom-input"
             >
@@ -22,10 +22,10 @@
           </div>
 
           <div class="input-wrapper max-input">
-            <q-input 
-              filled 
-              v-model="maxNum" 
-              type="number" 
+            <q-input
+              filled
+              v-model="maxNum"
+              type="number"
               label="Maximum"
               class="custom-input"
             >
@@ -36,11 +36,11 @@
           </div>
 
           <div class="button-wrapper">
-            <q-btn 
-              label="Generate" 
-              type="submit" 
-              color="primary" 
-              class="full-width generate-btn" 
+            <q-btn
+              label="Generate"
+              type="submit"
+              color="primary"
+              class="full-width generate-btn"
               @click="generate()"
             >
               <q-icon name="mdi-dice-5" class="btn-icon" />
@@ -48,17 +48,17 @@
           </div>
 
           <div class="result-wrapper" :class="{ 'has-result': result }">
-            <q-input 
-              filled 
-              v-model="result" 
-              label="Result" 
-              type="textarea" 
-              readonly 
+            <q-input
+              filled
+              v-model="result"
+              label="Result"
+              type="textarea"
+              readonly
               class="result-input"
             >
               <template v-slot:append>
-                <q-icon 
-                  name="mdi-clipboard-multiple-outline" 
+                <q-icon
+                  name="mdi-clipboard-multiple-outline"
                   @click="general.copyClipboard(result)"
                   class="copy-icon"
                 />
@@ -170,10 +170,11 @@ defineOptions({
 }
 
 .form-section {
-  padding-top: 24px;
+  padding: 24px 24px;
 }
 
 .input-wrapper {
+  margin: 0 16px;
   animation: fadeInUp 0.5s ease-out forwards;
   opacity: 0;
 }
@@ -237,7 +238,7 @@ defineOptions({
 }
 
 .button-wrapper {
-  margin: 24px 0;
+  margin: 24px 16px;
   animation: fadeInUp 0.5s ease-out 0.5s forwards;
   opacity: 0;
 }
@@ -282,13 +283,14 @@ defineOptions({
 }
 
 .result-wrapper {
-  margin-top: 24px;
+  margin: 24px 16px;
   animation: fadeInUp 0.5s ease-out 0.7s forwards;
   opacity: 0;
   transition: all 0.4s ease;
 }
 
 .result-wrapper.has-result {
+  opacity: 1;
   animation: resultReveal 0.5s ease-out;
 }
 
@@ -334,7 +336,7 @@ defineOptions({
     margin: 8px;
     border-radius: 20px;
   }
-  
+
   .page-title {
     font-size: 1.5rem;
   }

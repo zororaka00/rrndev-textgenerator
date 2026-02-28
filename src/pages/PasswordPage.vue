@@ -9,10 +9,10 @@
       <q-card-section class="q-gutter-md form-section">
 
         <div class="input-wrapper length-input">
-          <q-input 
-            filled 
-            v-model="numLength" 
-            type="number" 
+          <q-input
+            filled
+            v-model="numLength"
+            type="number"
             label="Password Length"
             class="custom-input"
           >
@@ -34,11 +34,11 @@
         </div>
 
         <div class="button-wrapper">
-          <q-btn 
-            label="Generate" 
-            type="submit" 
-            color="primary" 
-            class="full-width generate-btn" 
+          <q-btn
+            label="Generate"
+            type="submit"
+            color="primary"
+            class="full-width generate-btn"
             @click="generate()"
           >
             <q-icon name="mdi-key-plus" class="btn-icon" />
@@ -46,17 +46,17 @@
         </div>
 
         <div class="result-wrapper" :class="{ 'has-result': result }">
-          <q-input 
-            filled 
-            v-model="result" 
-            label="Result" 
-            type="textarea" 
-            readonly 
+          <q-input
+            filled
+            v-model="result"
+            label="Result"
+            type="textarea"
+            readonly
             class="result-input"
           >
             <template v-slot:append>
-              <q-icon 
-                name="mdi-clipboard-multiple-outline" 
+              <q-icon
+                name="mdi-clipboard-multiple-outline"
                 @click="general.copyClipboard(result)"
                 class="copy-icon"
               />
@@ -194,10 +194,11 @@ defineOptions({
 }
 
 .form-section {
-  padding-top: 24px;
+  padding: 24px 24px;
 }
 
 .input-wrapper {
+  margin: 0 16px;
   animation: fadeInUp 0.5s ease-out 0.3s forwards;
   opacity: 0;
 }
@@ -255,16 +256,17 @@ defineOptions({
 }
 
 .options-wrapper {
-  margin: 24px 0;
+  margin: 24px 16px;
   animation: fadeInUp 0.5s ease-out 0.5s forwards;
   opacity: 0;
 }
 
 .custom-option-group {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  max-width: 320px;
+  margin: 0 auto;
 }
 
 .custom-option-group :deep(.q-checkbox) {
@@ -297,7 +299,7 @@ defineOptions({
 }
 
 .button-wrapper {
-  margin: 24px 0;
+  margin: 24px 16px;
   animation: fadeInUp 0.5s ease-out 0.7s forwards;
   opacity: 0;
 }
@@ -342,13 +344,14 @@ defineOptions({
 }
 
 .result-wrapper {
-  margin-top: 24px;
+  margin: 24px 16px;
   animation: fadeInUp 0.5s ease-out 0.9s forwards;
   opacity: 0;
   transition: all 0.4s ease;
 }
 
 .result-wrapper.has-result {
+  opacity: 1;
   animation: resultReveal 0.5s ease-out;
 }
 
@@ -394,20 +397,14 @@ defineOptions({
     margin: 8px;
     border-radius: 20px;
   }
-  
+
   .page-title {
     font-size: 1.5rem;
   }
-  
+
   .custom-option-group {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .custom-option-group :deep(.q-checkbox) {
-    width: 100%;
-    max-width: 200px;
-    justify-content: center;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 100%;
   }
 }
 </style>

@@ -2,42 +2,13 @@
   <q-page class="q-pa-md page-container">
     <q-card flat bordered class="col b-card">
       <q-card-section class="q-gutter-md text-center title-section">
-        <div class="text-h5 text-bold page-title">Text Styler Generator</div>
+        <div class="text-h5 text-bold page-title">Decryption Generator</div>
         <div class="title-decoration"></div>
       </q-card-section>
       <q-separator inset class="custom-separator" />
       <q-card-section class="q-gutter-md form-section">
 
-        <div class="select-wrapper">
-          <q-select
-            filled
-            v-model="model"
-            :options="options"
-            label="Text Styler Option"
-            class="custom-select"
-          >
-            <template v-slot:prepend>
-              <q-icon name="mdi-format-letter-starts-with" class="select-icon" />
-            </template>
-          </q-select>
-        </div>
-
-        <div class="input-wrapper">
-          <q-input
-            filled
-            v-model="dataText"
-            type="textarea"
-            label="Input text...."
-            class="custom-input"
-            @update:model-value="value => result = string_to_unicode_variant(value, (TextStyle as any)[model.value?.replaceAll(' ', '')])"
-          >
-            <template v-slot:prepend>
-              <q-icon name="mdi-text-short" class="input-icon" />
-            </template>
-          </q-input>
-        </div>
-
-        <div class="result-wrapper" :class="{ 'has-result': result }">
+        <div class="result-wrapper initial" :class="{ 'has-result': result }">
           <q-input
             filled
             v-model="result"
@@ -55,60 +26,120 @@
             </template>
           </q-input>
         </div>
+
+        <div class="select-wrapper">
+          <q-select
+            filled
+            v-model="algorithm"
+            :options="algorithmOptions"
+            label="Select Algorithm"
+            class="custom-select"
+          >
+            <template v-slot:prepend>
+              <q-icon name="mdi-key-variant" class="select-icon" />
+            </template>
+          </q-select>
+        </div>
+
+        <div class="input-wrapper">
+          <q-input
+            filled
+            v-model="secretKey"
+            label="Secret Key"
+            type="textarea"
+            class="custom-input"
+          >
+            <template v-slot:prepend>
+              <q-icon name="mdi-lock" class="input-icon" />
+            </template>
+          </q-input>
+        </div>
+
+        <div class="input-wrapper">
+          <q-input
+            filled
+            v-model="cipherText"
+            label="Encrypted Text"
+            type="textarea"
+            class="custom-input"
+          >
+            <template v-slot:prepend>
+              <q-icon name="mdi-text" class="input-icon" />
+            </template>
+          </q-input>
+        </div>
+
+        <div class="button-wrapper">
+          <q-btn
+            label="Decrypt"
+            type="submit"
+            color="primary"
+            class="full-width generate-btn"
+            @click="decrypt()"
+          >
+            <q-icon name="mdi-lock-open-outline" class="btn-icon" />
+          </q-btn>
+        </div>
       </q-card-section>
     </q-card>
   </q-page>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
+import CryptoJS from 'crypto-js';
 
 import { useGeneralStore } from '../stores/general';
-import { string_to_unicode_variant } from 'string-to-unicode-variant';
 
 const general = useGeneralStore();
 const result = ref('');
-const dataText = ref('');
-const model: any = ref(null);
-const options: any = ref([]);
+const cipherText = ref('');
+const secretKey = ref('');
+const algorithm = ref('AES');
+const algorithmOptions = ['AES', 'DES', 'RC4', 'Rabbit', 'TripleDES'];
 
-enum TextStyle {
-  Monospace = 'm',
-  Bold = 'b',
-  Italic = 'i',
-  BoldItalic = 'bi',
-  Script = 'c',
-  BoldScript = 'bc',
-  Gothic = 'g',
-  GothicBold = 'bg',
-  DoubleStruck = 'd',
-  Sans = 's',
-  BoldSans = 'bs',
-  ItalicSans = 'is',
-  BoldItalicSans = 'bis',
-  Circled = 'o',
-  CircledNegative = 'on',
-  Squared = 'q',
-  SquaredNegative = 'qn',
-  Parenthesis = 'p',
-  Fullwidth = 'w',
-  Flags = 'f',
-  NumbersDot = 'nd',
-  NumbersComma = 'nc',
-  NumberDoubleCircled = 'ndc',
-}
+const decrypt = () => {
+  if (!cipherText.value) {
+    result.value = 'Please enter encrypted text to decrypt';
+    return;
+  }
+  if (!secretKey.value) {
+    result.value = 'Please enter the secret key';
+    return;
+  }
 
-onMounted(() => {
-  const textStyleKeys = Object.keys(TextStyle).filter((key) => isNaN(Number(key))) as Array<keyof typeof TextStyle>;
-  options.value = textStyleKeys.map(data => ({
-    label: string_to_unicode_variant(data.replace(/(?!^)([A-Z])/g, ' $1'), TextStyle[data]),
-    value: data
-  }));
-  model.value = options.value[0];
-});
+  try {
+    let decrypted = '';
+    switch (algorithm.value) {
+      case 'AES':
+        decrypted = CryptoJS.AES.decrypt(cipherText.value, secretKey.value).toString(CryptoJS.enc.Utf8);
+        break;
+      case 'DES':
+        decrypted = CryptoJS.DES.decrypt(cipherText.value, secretKey.value).toString(CryptoJS.enc.Utf8);
+        break;
+      case 'RC4':
+        decrypted = CryptoJS.RC4.decrypt(cipherText.value, secretKey.value).toString(CryptoJS.enc.Utf8);
+        break;
+      case 'Rabbit':
+        decrypted = CryptoJS.Rabbit.decrypt(cipherText.value, secretKey.value).toString(CryptoJS.enc.Utf8);
+        break;
+      case 'TripleDES':
+        decrypted = CryptoJS.TripleDES.decrypt(cipherText.value, secretKey.value).toString(CryptoJS.enc.Utf8);
+        break;
+    }
+
+    if (!decrypted) {
+      result.value = 'Decryption failed: Invalid key or corrupted data';
+    } else {
+      result.value = decrypted;
+    }
+  } catch (error) {
+    result.value = 'Decryption failed: ' + String(error);
+  }
+};
 
 defineOptions({
-  name: 'StylerPage'
+  name: 'DecryptionPage'
 });
 </script>
 
@@ -196,10 +227,16 @@ defineOptions({
   padding: 24px 24px;
 }
 
-.select-wrapper {
-  margin: 0 16px 20px 16px;
+.result-wrapper {
+  margin: 0 16px;
   animation: fadeInUp 0.5s ease-out 0.2s forwards;
   opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.result-wrapper.has-result {
+  opacity: 1;
+  animation: resultReveal 0.5s ease-out;
 }
 
 @keyframes fadeInUp {
@@ -211,6 +248,49 @@ defineOptions({
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes resultReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.result-input {
+  border-radius: 16px;
+}
+
+.result-input :deep(.q-field__control) {
+  border-radius: 16px;
+  background: rgba(26, 35, 126, 0.03);
+  min-height: 80px;
+  transition: all 0.3s ease;
+}
+
+.result-input :deep(.q-field__control:hover) {
+  background: rgba(26, 35, 126, 0.06);
+}
+
+.copy-icon {
+  color: #3949ab;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.copy-icon:hover {
+  color: #1a237e;
+  transform: scale(1.2) rotate(5deg);
+}
+
+.select-wrapper {
+  margin: 20px 16px;
+  animation: fadeInUp 0.5s ease-out 0.3s forwards;
+  opacity: 0;
 }
 
 .custom-select {
@@ -251,8 +331,8 @@ defineOptions({
 }
 
 .input-wrapper {
-  margin: 0 16px 20px 16px;
-  animation: fadeInUp 0.5s ease-out 0.3s forwards;
+  margin: 20px 16px;
+  animation: fadeInUp 0.5s ease-out 0.4s forwards;
   opacity: 0;
 }
 
@@ -293,53 +373,49 @@ defineOptions({
   transform: scale(1.1);
 }
 
-.result-wrapper {
-  margin: 0 16px;
-  animation: fadeInUp 0.5s ease-out 0.4s forwards;
+.button-wrapper {
+  margin: 24px 16px;
+  animation: fadeInUp 0.5s ease-out 0.5s forwards;
   opacity: 0;
-  transition: all 0.4s ease;
 }
 
-.result-wrapper.has-result {
-  opacity: 1;
-  animation: resultReveal 0.5s ease-out;
-}
-
-@keyframes resultReveal {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.result-input {
+.generate-btn {
+  height: 56px;
+  font-size: 1.1rem;
+  font-weight: 600;
   border-radius: 16px;
+  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
 }
 
-.result-input :deep(.q-field__control) {
-  border-radius: 16px;
-  background: rgba(26, 35, 126, 0.03);
-  min-height: 100px;
-  transition: all 0.3s ease;
+.generate-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
 }
 
-.result-input :deep(.q-field__control:hover) {
-  background: rgba(26, 35, 126, 0.06);
+.generate-btn:hover::before {
+  left: 100%;
 }
 
-.copy-icon {
-  color: #3949ab;
-  transition: all 0.3s ease;
-  cursor: pointer;
+.generate-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(26, 35, 126, 0.35);
 }
 
-.copy-icon:hover {
-  color: #1a237e;
-  transform: scale(1.2) rotate(5deg);
+.generate-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-icon {
+  margin-left: 8px;
 }
 
 @media (max-width: 599px) {

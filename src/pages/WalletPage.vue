@@ -23,17 +23,17 @@
           <transition name="tab-fade" mode="out-in">
             <div v-if="tab == 'mnemonic'" key="mnemonic" class="tab-content">
               <div class="input-wrapper">
-                <q-input 
-                  filled 
-                  type="textarea" 
-                  v-model="mnemonic" 
-                  label="Mnemonic" 
-                  readonly 
+                <q-input
+                  filled
+                  type="textarea"
+                  v-model="mnemonic"
+                  label="Mnemonic"
+                  readonly
                   class="result-input"
                 >
                   <template v-slot:append>
-                    <q-icon 
-                      name="mdi-clipboard-multiple-outline" 
+                    <q-icon
+                      name="mdi-clipboard-multiple-outline"
                       @click="general.copyClipboard(mnemonic)"
                       class="copy-icon"
                     />
@@ -43,17 +43,17 @@
             </div>
             <div v-else key="pkey" class="tab-content">
               <div class="input-wrapper">
-                <q-input 
-                  filled 
-                  v-model="privatekey" 
-                  type="textarea" 
-                  label="Private Key" 
+                <q-input
+                  filled
+                  v-model="privatekey"
+                  type="textarea"
+                  label="Private Key"
                   readonly
                   class="result-input"
                 >
                   <template v-slot:append>
-                    <q-icon 
-                      name="mdi-clipboard-multiple-outline" 
+                    <q-icon
+                      name="mdi-clipboard-multiple-outline"
                       @click="general.copyClipboard(privatekey)"
                       class="copy-icon"
                     />
@@ -64,20 +64,20 @@
           </transition>
 
           <div class="wallet-address-wrapper">
-            <q-input 
-              filled 
-              v-model="wallet_address" 
-              type="textarea" 
-              label="Wallet Address" 
-              readonly 
+            <q-input
+              filled
+              v-model="wallet_address"
+              type="textarea"
+              label="Wallet Address"
+              readonly
               class="result-input"
             >
               <template v-slot:prepend>
                 <q-icon name="mdi-wallet" class="wallet-icon" />
               </template>
               <template v-slot:append>
-                <q-icon 
-                  name="mdi-clipboard-multiple-outline" 
+                <q-icon
+                  name="mdi-clipboard-multiple-outline"
                   @click="general.copyClipboard(wallet_address)"
                   class="copy-icon"
                 />
@@ -86,11 +86,11 @@
           </div>
 
           <div class="button-wrapper">
-            <q-btn 
-              label="Generate" 
-              type="submit" 
-              color="primary" 
-              class="full-width generate-btn" 
+            <q-btn
+              label="Generate"
+              type="submit"
+              color="primary"
+              class="full-width generate-btn"
               @click="generate()"
             >
               <q-icon name="mdi-cog-sync" class="btn-icon" />
@@ -263,7 +263,7 @@ defineOptions({
 }
 
 .form-section {
-  padding-top: 24px;
+  padding: 24px 24px;
 }
 
 .tab-content {
@@ -393,7 +393,7 @@ defineOptions({
     margin: 8px;
     border-radius: 20px;
   }
-  
+
   .page-title {
     font-size: 1.4rem;
   }

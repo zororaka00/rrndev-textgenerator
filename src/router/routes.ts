@@ -26,6 +26,16 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/MainLayout.vue'),
     children: [{ path: '', component: () => import('pages/WalletPage.vue') }],
   },
+  {
+    path: '/encryption',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [{ path: '', component: () => import('pages/EncryptionPage.vue') }],
+  },
+  {
+    path: '/decryption',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [{ path: '', component: () => import('pages/DecryptionPage.vue') }],
+  },
 
   // Always leave this as last one,
   // but you can also remove it

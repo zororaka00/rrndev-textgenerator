@@ -7,19 +7,19 @@
         </q-card-section>
         <q-separator inset class="custom-separator" />
         <q-card-section class="q-gutter-md form-section">
-          
+
           <div class="result-wrapper initial" :class="{ 'has-result': result }">
-            <q-input 
-              filled 
-              v-model="result" 
-              label="Result" 
-              type="textarea" 
-              readonly 
+            <q-input
+              filled
+              v-model="result"
+              label="Result"
+              type="textarea"
+              readonly
               class="result-input"
             >
               <template v-slot:append>
-                <q-icon 
-                  name="mdi-clipboard-multiple-outline" 
+                <q-icon
+                  name="mdi-clipboard-multiple-outline"
                   @click="general.copyClipboard(result)"
                   class="copy-icon"
                 />
@@ -28,10 +28,10 @@
           </div>
 
           <div class="select-wrapper">
-            <q-select 
-              filled 
-              v-model="model" 
-              :options="options" 
+            <q-select
+              filled
+              v-model="model"
+              :options="options"
               label="Select Hash"
               class="custom-select"
             >
@@ -42,10 +42,10 @@
           </div>
 
           <div class="input-wrapper">
-            <q-input 
-              filled 
-              v-model="dataText" 
-              label="Text" 
+            <q-input
+              filled
+              v-model="dataText"
+              label="Text"
               type="textarea"
               class="custom-input"
             >
@@ -56,11 +56,11 @@
           </div>
 
           <div class="button-wrapper">
-            <q-btn 
-              label="Generate" 
-              type="submit" 
-              color="primary" 
-              class="full-width generate-btn" 
+            <q-btn
+              label="Generate"
+              type="submit"
+              color="primary"
+              class="full-width generate-btn"
               @click="generate()"
             >
               <q-icon name="mdi-hash" class="btn-icon" />
@@ -171,16 +171,18 @@ defineOptions({
 }
 
 .form-section {
-  padding-top: 24px;
+  padding: 24px 24px;
 }
 
 .result-wrapper {
+  margin: 0 16px;
   animation: fadeInUp 0.5s ease-out 0.2s forwards;
   opacity: 0;
   transition: all 0.4s ease;
 }
 
 .result-wrapper.has-result {
+  opacity: 1;
   animation: resultReveal 0.5s ease-out;
 }
 
@@ -233,7 +235,7 @@ defineOptions({
 }
 
 .select-wrapper {
-  margin: 20px 0;
+  margin: 20px 16px;
   animation: fadeInUp 0.5s ease-out 0.3s forwards;
   opacity: 0;
 }
@@ -276,7 +278,7 @@ defineOptions({
 }
 
 .input-wrapper {
-  margin: 20px 0;
+  margin: 20px 16px;
   animation: fadeInUp 0.5s ease-out 0.4s forwards;
   opacity: 0;
 }
@@ -319,7 +321,7 @@ defineOptions({
 }
 
 .button-wrapper {
-  margin: 24px 0;
+  margin: 24px 16px;
   animation: fadeInUp 0.5s ease-out 0.5s forwards;
   opacity: 0;
 }
@@ -368,7 +370,7 @@ defineOptions({
     margin: 8px;
     border-radius: 20px;
   }
-  
+
   .page-title {
     font-size: 1.5rem;
   }
